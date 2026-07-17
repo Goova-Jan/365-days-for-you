@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>365 يومًا لك — تجربة</title>
+<style>
+:root {
+  --black:#030303;
+  --soft:#0b0b0d;
+  --white:#faf8f5;
+  --muted:#aaa39a;
+  --gold:#d4b276;
+  --paper:#f1eadf;
+  --ink:#1b1714;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  min-height:100vh;
+  background:var(--black);
+  color:var(--white);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+  overflow-x:hidden;
+}
+button { font:inherit; }
+.hidden { display:none !important; }
+.screen {
+  min-height:100svh;
+  width:100%;
+  position:relative;
+}
+.grain {
+  position:fixed; inset:0; z-index:999; pointer-events:none; opacity:.13;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+  mix-blend-mode:screen;
+}
+.music-toggle {
+  position:fixed; top:max(16px,env(safe-area-inset-top)); left:16px; z-index:1000;
+  width:44px; height:44px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(0,0,0,.42); color:white; backdrop-filter:blur(12px);
+}
+.music-toggle.on { color:var(--gold); box-shadow:0 0 24px rgba(212,178,118,.22); }
+
+/* INTRO */
+.intro {
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 44%,rgba(55,39,24,.55),transparent 31%),
+    linear-gradient(180deg,#000 0%,#080808 68%,#000 100%);
+}
+.sparkles::before,.sparkles::after {
+  content:""; position:absolute; inset:-25%;
+  background-image:radial-gradient(circle,rgba(255,255,255,.72) 0 1px,transparent 1.4px);
+  background-size:76px 76px; opacity:.17; animation:stars 20s linear infinite;
+}
+.sparkles::after { background-size:122px 122px; opacity:.09; animation-duration:32s; }
+@keyframes stars { to { transform:translate(90px,-110px); } }
+
+.balloon-scene {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  opacity:0; animation:sceneIn 1.25s .3s forwards, sceneOut 1s 5s forwards;
+}
+.balloon-wrap {
+  position:relative; width:min(78vw,430px); height:min(96vw,520px);
+  display:flex; align-items:flex-start; justify-content:center;
+  animation:float 4s ease-in-out infinite;
+}
+.balloon {
+  position:relative;
+  width:min(70vw,380px); height:min(82vw,440px);
+  border-radius:50% 50% 47% 47% / 56% 56% 44% 44%;
+  display:flex; align-items:center; justify-content:center;
+  background:
+    radial-gradient(circle at 31% 23%,rgba(255,255,255,.44),transparent 12%),
+    radial-gradient(circle at 45% 38%,#e7c58c 0%,#b88a4d 48%,#6d4523 100%);
+  box-shadow:
+    inset -28px -34px 55px rgba(57,28,9,.48),
+    inset 18px 12px 40px rgba(255,255,255,.18),
+    0 36px 100px rgba(0,0,0,.72),
+    0 0 65px rgba(212,178,118,.24);
+}
+.balloon::after {
+  content:""; position:absolute; bottom:-19px; left:50%; transform:translateX(-50%);
+  width:0; height:0;
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-top:27px solid #86572d;
+}
+.string {
+  position:absolute; top:calc(min(82vw,440px) - 1px); left:50%;
+  width:1px; height:125px; background:rgba(255,255,255,.42);
+  transform-origin:top; animation:stringSwing 3.8s ease-in-out infinite;
+}
+.balloon-text {
+  font-size:clamp(2rem,8vw,3.6rem);
+  font-weight:300;
+  color:#fffdf8;
+  text-shadow:0 3px 20px rgba(52,27,7,.45);
+}
+@keyframes float {
+  0%,100% { transform:translateY(16px) rotate(-1.3deg); }
+  50% { transform:translateY(-18px) rotate(1.3deg); }
+}
+@keyframes stringSwing {
+  0%,100% { transform:translateX(-50%) rotate(3deg); }
+  50% { transform:translateX(-50%) rotate(-3deg); }
+}
+@keyframes sceneIn { to { opacity:1; } }
+@keyframes sceneOut { to { opacity:0; transform:scale(1.06); } }
+
+.intro-copy {
+  position:relative; z-index:5; width:min(88vw,700px);
+  min-height:280px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+}
+.intro-copy p {
+  position:absolute; width:100%; margin:0;
+  font-weight:300; line-height:2; opacity:0;
+}
+#line1 {
+  font-size:clamp(1.35rem,5.2vw,2.25rem);
+  animation:textIn 1.3s 6.2s forwards,textOut .8s 8.7s forwards;
+}
+#line2 {
+  font-size:clamp(1.45rem,5.6vw,2.45rem);
+  animation:textIn 1.3s 9.5s forwards;
+}
+.begin {
+  position:absolute; top:200px;
+  opacity:0; padding:13px 34px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.38);
+  background:rgba(255,255,255,.04); color:white;
+  animation:textIn 1.1s 11.7s forwards;
+}
+@keyframes textIn { to { opacity:1; transform:translateY(0); } }
+@keyframes textOut { to { opacity:0; transform:translateY(-10px); } }
+
+/* HOME */
+.home {
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  padding:30px;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(212,178,118,.10),transparent 30%),
+    linear-gradient(180deg,#050505,#0a0a0c);
+}
+.home-box { width:min(100%,570px); }
+.kicker { color:var(--gold); letter-spacing:.13em; font-size:.88rem; margin-bottom:18px; }
+.home h1 { font-size:clamp(1.9rem,7vw,3rem); font-weight:300; margin:0; }
+.track { height:2px; background:rgba(255,255,255,.13); margin:30px 0 24px; overflow:hidden; }
+.fill { height:100%; background:linear-gradient(90deg,#8e6f3d,var(--gold),#f0ddb5); width:0; transition:width .7s ease; }
+.status { color:var(--muted); min-height:48px; line-height:1.9; }
+.open-btn { border:0; border-bottom:1px solid rgba(255,255,255,.42); background:none; color:white; padding:10px 4px; }
+.completed { margin-top:26px; }
+.completed .heart { font-size:1.55rem; }
+
+/* LETTER */
+.letter {
+  padding:22px 10px 54px;
+  background:
+    radial-gradient(circle at 50% -18%,rgba(212,178,118,.13),transparent 40%),
+    #080808;
+}
+.stage { width:min(100%,830px); margin:auto; }
+.letter-header { padding:0 8px 18px; }
+.letter-header small { color:var(--gold); letter-spacing:.11em; }
+.letter-header h2 { font-size:clamp(1.25rem,5vw,1.9rem); font-weight:300; margin:7px 0 0; }
+.page {
+  position:relative; color:var(--ink);
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.045),transparent 8%,transparent 92%,rgba(0,0,0,.05)),
+    repeating-linear-gradient(0deg,rgba(67,52,38,.019) 0 1px,transparent 1px 4px),
+    var(--paper);
+  border-radius:4px 17px 17px 4px;
+  box-shadow:0 32px 95px rgba(0,0,0,.58),inset 24px 0 32px rgba(93,70,46,.06);
+  animation:pageOpen 1.05s cubic-bezier(.2,.8,.2,1) both;
+}
+.page::after {
+  content:""; position:absolute; left:0; right:0; bottom:-7px; height:7px;
+  background:linear-gradient(180deg,#c9bfb1,#978b7d); opacity:.78;
+}
+@keyframes pageOpen {
+  from { opacity:0; transform:perspective(1250px) rotateY(-15deg) translateY(20px); }
+  to { opacity:1; transform:perspective(1250px) rotateY(0) translateY(0); }
+}
+.content { padding:clamp(30px,7vw,72px) clamp(22px,8vw,80px) clamp(36px,7vw,64px); }
+.date { color:#7d7165; font-size:.86rem; }
+.content h3 { font-size:clamp(1.7rem,5.8vw,2.55rem); margin:16px 0 28px; }
+.body { white-space:pre-line; font-size:clamp(1.05rem,4vw,1.2rem); line-height:2.3; }
+.done-wrap { display:flex; justify-content:center; padding-top:52px; }
+.done {
+  display:flex; align-items:center; gap:8px;
+  border:0; background:none; color:#2d2722; opacity:.78;
+}
+.done b { font-size:1.55rem; }
+
+/* GOODBYE & LOCKED */
+.goodbye,.locked { display:flex; align-items:center; justify-content:center; text-align:center; padding:28px; }
+.goodbye p { font-size:clamp(1.55rem,7vw,2.9rem); opacity:0; animation:textIn 1.2s forwards; }
+.locked p { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<button id="musicToggle" class="music-toggle">♪</button>
+
+<section id="intro" class="screen intro">
+  <div class="sparkles"></div>
+  <div class="balloon-scene">
+    <div class="balloon-wrap">
+      <div class="balloon"><span class="balloon-text">لـ بسام…</span></div>
+      <div class="string"></div>
+    </div>
+  </div>
+  <div class="intro-copy">
+    <p id="line1">هذه ليست مجرد رسائل…</p>
+    <p id="line2">بل سنة كاملة… كُتبت من أجلك.</p>
+    <button id="begin" class="begin">ابدأ 🤍</button>
+  </div>
+</section>
+
+<section id="home" class="screen home hidden">
+  <div class="home-box">
+    <p class="kicker">365 يومًا لك</p>
+    <h1 id="homeTitle"></h1>
+    <div class="track"><div id="homeFill" class="fill"></div></div>
+    <p id="status" class="status"></p>
+    <button id="openBtn" class="open-btn">افتح رسالة اليوم</button>
+    <div id="completed" class="completed hidden">
+      <div class="heart">❤️</div>
+      <p>تم فتح رسالة اليوم</p>
+      <small>أشوفك بكرة 🤍</small>
+    </div>
+  </div>
+</section>
+
+<section id="letter" class="screen letter hidden">
+  <div class="stage">
+    <header class="letter-header">
+      <small>365 يومًا لك</small>
+      <h2 id="counter"></h2>
+      <div class="track"><div id="letterFill" class="fill"></div></div>
+    </header>
+    <article class="page">
+      <div class="content">
+        <p id="date" class="date"></p>
+        <h3 id="title"></h3>
+        <div id="body" class="body"></div>
+        <div class="done-wrap">
+          <button id="done" class="done"><b id="heart">♡</b><span>تم</span></button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="goodbye" class="screen goodbye hidden"><p>أشوفك بكرة 🤍</p></section>
+<section id="locked" class="screen locked hidden">
+  <div>
+    <p class="kicker">365 يومًا لك</p>
+    <h2>موعدنا قريب…</h2>
+    <p>تبدأ أول رسالة يوم 27 يوليو 2026.</p>
+  </div>
+</section>
+
+<script>
+const START_DATE=new Date("2026-07-27T00:00:00+03:00");
+const TOTAL=365;
+const messages=[{"day": 1, "title": "اليوم الأول 🤍", "body": "قبل أي شيء…\n\nأتمنى من كل قلبي أن تكون هذه السنة الجديدة من عمرك أخف، وأجمل، وأهدأ من كل السنوات التي سبقتها. وأن ترى فيها كل الأشياء الجميلة التي تستحقها، ويحقق الله لك فيها ما تتمناه وأكثر.\n\nإذا أنت تقرأ هذه الرسالة الآن…\n\nفمعناها أنك بدأت سنة جديدة من عمرك، وحبيت أكون معك بطريقة مختلفة.\n\nيمكن ما أقدر أكون جنبك كل يوم، لكن كنت أبغى ألقى طريقة تحس فيها بوجودي معك، حتى لو كانت مجرد دقائق بسيطة من يومك.\n\nومن هنا بدأت هذه الفكرة…\n\nمن اليوم، ولمدة 365 يومًا، بيكون عندك رسالة جديدة كل صباح.\n\nبعض الرسائل بتضحكك…\nوبعضها بتشجعك…\nوبعضها يمكن يجيك في الوقت اللي تحتاج تسمعه فيه بالضبط.\nوبعضها ما بيكون إلا تذكير بسيط تهتم فيه بنفسك، أو يخليك تبتسم بدون سبب.\n\nلكن في شيء واحد ثابت في كل الرسائل…\n\nكل رسالة هنا مكتوبة لك… ومن أجلك.\n\nأوعدني بشيء واحد فقط…\n\nافتح رسالة واحدة كل يوم.\n\nلا تستعجل، ولا تحاول تعرف اللي بعدها.\n\nلأن أجمل الأشياء… تجي في وقتها.\n\nوأتمنى مع نهاية هذه الرحلة، يكون فيه على الأقل 365 ابتسامة، و365 لحظة جميلة، ورسائل تلقاها وقت ما تحتاجها.\n\nكل عام وأنت بخير يا حبيبي…\n\nوأتمنى أكون سببًا، ولو لابتسامة واحدة… في كل يوم من سنتك الجديدة. 🤍"}, {"day": 2, "title": "اليوم 2", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 3, "title": "اليوم 3", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 4, "title": "اليوم 4", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 5, "title": "اليوم 5", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 6, "title": "اليوم 6", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 7, "title": "اليوم 7", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 8, "title": "اليوم 8", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 9, "title": "اليوم 9", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 10, "title": "اليوم 10", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 11, "title": "اليوم 11", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 12, "title": "اليوم 12", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 13, "title": "اليوم 13", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 14, "title": "اليوم 14", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 15, "title": "اليوم 15", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 16, "title": "اليوم 16", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 17, "title": "اليوم 17", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 18, "title": "اليوم 18", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 19, "title": "اليوم 19", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 20, "title": "اليوم 20", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 21, "title": "اليوم 21", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 22, "title": "اليوم 22", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 23, "title": "اليوم 23", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 24, "title": "اليوم 24", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 25, "title": "اليوم 25", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 26, "title": "اليوم 26", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 27, "title": "اليوم 27", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 28, "title": "اليوم 28", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 29, "title": "اليوم 29", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 30, "title": "اليوم 30", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 31, "title": "اليوم 31", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 32, "title": "اليوم 32", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 33, "title": "اليوم 33", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 34, "title": "اليوم 34", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 35, "title": "اليوم 35", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 36, "title": "اليوم 36", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 37, "title": "اليوم 37", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 38, "title": "اليوم 38", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 39, "title": "اليوم 39", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 40, "title": "اليوم 40", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 41, "title": "اليوم 41", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 42, "title": "اليوم 42", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 43, "title": "اليوم 43", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 44, "title": "اليوم 44", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 45, "title": "اليوم 45", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 46, "title": "اليوم 46", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 47, "title": "اليوم 47", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 48, "title": "اليوم 48", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 49, "title": "اليوم 49", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 50, "title": "اليوم 50", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 51, "title": "اليوم 51", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 52, "title": "اليوم 52", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 53, "title": "اليوم 53", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 54, "title": "اليوم 54", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 55, "title": "اليوم 55", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 56, "title": "اليوم 56", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 57, "title": "اليوم 57", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 58, "title": "اليوم 58", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 59, "title": "اليوم 59", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 60, "title": "اليوم 60", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 61, "title": "اليوم 61", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 62, "title": "اليوم 62", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 63, "title": "اليوم 63", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 64, "title": "اليوم 64", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 65, "title": "اليوم 65", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 66, "title": "اليوم 66", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 67, "title": "اليوم 67", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 68, "title": "اليوم 68", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 69, "title": "اليوم 69", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 70, "title": "اليوم 70", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 71, "title": "اليوم 71", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 72, "title": "اليوم 72", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 73, "title": "اليوم 73", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 74, "title": "اليوم 74", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 75, "title": "اليوم 75", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 76, "title": "اليوم 76", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 77, "title": "اليوم 77", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 78, "title": "اليوم 78", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 79, "title": "اليوم 79", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 80, "title": "اليوم 80", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 81, "title": "اليوم 81", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 82, "title": "اليوم 82", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 83, "title": "اليوم 83", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 84, "title": "اليوم 84", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 85, "title": "اليوم 85", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 86, "title": "اليوم 86", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 87, "title": "اليوم 87", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 88, "title": "اليوم 88", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 89, "title": "اليوم 89", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 90, "title": "اليوم 90", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 91, "title": "اليوم 91", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 92, "title": "اليوم 92", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 93, "title": "اليوم 93", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 94, "title": "اليوم 94", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 95, "title": "اليوم 95", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 96, "title": "اليوم 96", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 97, "title": "اليوم 97", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 98, "title": "اليوم 98", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 99, "title": "اليوم 99", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 100, "title": "اليوم 100", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 101, "title": "اليوم 101", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 102, "title": "اليوم 102", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 103, "title": "اليوم 103", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 104, "title": "اليوم 104", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 105, "title": "اليوم 105", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 106, "title": "اليوم 106", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 107, "title": "اليوم 107", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 108, "title": "اليوم 108", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 109, "title": "اليوم 109", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 110, "title": "اليوم 110", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 111, "title": "اليوم 111", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 112, "title": "اليوم 112", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 113, "title": "اليوم 113", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 114, "title": "اليوم 114", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 115, "title": "اليوم 115", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 116, "title": "اليوم 116", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 117, "title": "اليوم 117", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 118, "title": "اليوم 118", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 119, "title": "اليوم 119", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 120, "title": "اليوم 120", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 121, "title": "اليوم 121", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 122, "title": "اليوم 122", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 123, "title": "اليوم 123", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 124, "title": "اليوم 124", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 125, "title": "اليوم 125", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 126, "title": "اليوم 126", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 127, "title": "اليوم 127", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 128, "title": "اليوم 128", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 129, "title": "اليوم 129", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 130, "title": "اليوم 130", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 131, "title": "اليوم 131", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 132, "title": "اليوم 132", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 133, "title": "اليوم 133", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 134, "title": "اليوم 134", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 135, "title": "اليوم 135", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 136, "title": "اليوم 136", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 137, "title": "اليوم 137", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 138, "title": "اليوم 138", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 139, "title": "اليوم 139", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 140, "title": "اليوم 140", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 141, "title": "اليوم 141", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 142, "title": "اليوم 142", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 143, "title": "اليوم 143", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 144, "title": "اليوم 144", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 145, "title": "اليوم 145", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 146, "title": "اليوم 146", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 147, "title": "اليوم 147", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 148, "title": "اليوم 148", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 149, "title": "اليوم 149", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 150, "title": "اليوم 150", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 151, "title": "اليوم 151", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 152, "title": "اليوم 152", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 153, "title": "اليوم 153", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 154, "title": "اليوم 154", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 155, "title": "اليوم 155", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 156, "title": "اليوم 156", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 157, "title": "اليوم 157", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 158, "title": "اليوم 158", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 159, "title": "اليوم 159", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 160, "title": "اليوم 160", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 161, "title": "اليوم 161", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 162, "title": "اليوم 162", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 163, "title": "اليوم 163", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 164, "title": "اليوم 164", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 165, "title": "اليوم 165", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 166, "title": "اليوم 166", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 167, "title": "اليوم 167", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 168, "title": "اليوم 168", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 169, "title": "اليوم 169", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 170, "title": "اليوم 170", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 171, "title": "اليوم 171", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 172, "title": "اليوم 172", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 173, "title": "اليوم 173", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 174, "title": "اليوم 174", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 175, "title": "اليوم 175", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 176, "title": "اليوم 176", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 177, "title": "اليوم 177", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 178, "title": "اليوم 178", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 179, "title": "اليوم 179", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 180, "title": "اليوم 180", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 181, "title": "اليوم 181", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 182, "title": "اليوم 182", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 183, "title": "اليوم 183", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 184, "title": "اليوم 184", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 185, "title": "اليوم 185", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 186, "title": "اليوم 186", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 187, "title": "اليوم 187", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 188, "title": "اليوم 188", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 189, "title": "اليوم 189", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 190, "title": "اليوم 190", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 191, "title": "اليوم 191", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 192, "title": "اليوم 192", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 193, "title": "اليوم 193", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 194, "title": "اليوم 194", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 195, "title": "اليوم 195", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 196, "title": "اليوم 196", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 197, "title": "اليوم 197", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 198, "title": "اليوم 198", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 199, "title": "اليوم 199", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 200, "title": "اليوم 200", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 201, "title": "اليوم 201", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 202, "title": "اليوم 202", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 203, "title": "اليوم 203", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 204, "title": "اليوم 204", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 205, "title": "اليوم 205", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 206, "title": "اليوم 206", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 207, "title": "اليوم 207", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 208, "title": "اليوم 208", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 209, "title": "اليوم 209", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 210, "title": "اليوم 210", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 211, "title": "اليوم 211", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 212, "title": "اليوم 212", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 213, "title": "اليوم 213", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 214, "title": "اليوم 214", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 215, "title": "اليوم 215", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 216, "title": "اليوم 216", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 217, "title": "اليوم 217", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 218, "title": "اليوم 218", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 219, "title": "اليوم 219", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 220, "title": "اليوم 220", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 221, "title": "اليوم 221", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 222, "title": "اليوم 222", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 223, "title": "اليوم 223", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 224, "title": "اليوم 224", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 225, "title": "اليوم 225", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 226, "title": "اليوم 226", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 227, "title": "اليوم 227", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 228, "title": "اليوم 228", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 229, "title": "اليوم 229", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 230, "title": "اليوم 230", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 231, "title": "اليوم 231", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 232, "title": "اليوم 232", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 233, "title": "اليوم 233", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 234, "title": "اليوم 234", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 235, "title": "اليوم 235", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 236, "title": "اليوم 236", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 237, "title": "اليوم 237", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 238, "title": "اليوم 238", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 239, "title": "اليوم 239", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 240, "title": "اليوم 240", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 241, "title": "اليوم 241", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 242, "title": "اليوم 242", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 243, "title": "اليوم 243", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 244, "title": "اليوم 244", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 245, "title": "اليوم 245", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 246, "title": "اليوم 246", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 247, "title": "اليوم 247", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 248, "title": "اليوم 248", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 249, "title": "اليوم 249", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 250, "title": "اليوم 250", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 251, "title": "اليوم 251", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 252, "title": "اليوم 252", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 253, "title": "اليوم 253", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 254, "title": "اليوم 254", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 255, "title": "اليوم 255", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 256, "title": "اليوم 256", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 257, "title": "اليوم 257", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 258, "title": "اليوم 258", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 259, "title": "اليوم 259", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 260, "title": "اليوم 260", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 261, "title": "اليوم 261", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 262, "title": "اليوم 262", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 263, "title": "اليوم 263", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 264, "title": "اليوم 264", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 265, "title": "اليوم 265", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 266, "title": "اليوم 266", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 267, "title": "اليوم 267", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 268, "title": "اليوم 268", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 269, "title": "اليوم 269", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 270, "title": "اليوم 270", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 271, "title": "اليوم 271", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 272, "title": "اليوم 272", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 273, "title": "اليوم 273", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 274, "title": "اليوم 274", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 275, "title": "اليوم 275", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 276, "title": "اليوم 276", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 277, "title": "اليوم 277", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 278, "title": "اليوم 278", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 279, "title": "اليوم 279", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 280, "title": "اليوم 280", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 281, "title": "اليوم 281", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 282, "title": "اليوم 282", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 283, "title": "اليوم 283", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 284, "title": "اليوم 284", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 285, "title": "اليوم 285", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 286, "title": "اليوم 286", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 287, "title": "اليوم 287", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 288, "title": "اليوم 288", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 289, "title": "اليوم 289", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 290, "title": "اليوم 290", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 291, "title": "اليوم 291", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 292, "title": "اليوم 292", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 293, "title": "اليوم 293", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 294, "title": "اليوم 294", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 295, "title": "اليوم 295", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 296, "title": "اليوم 296", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 297, "title": "اليوم 297", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 298, "title": "اليوم 298", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 299, "title": "اليوم 299", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 300, "title": "اليوم 300", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 301, "title": "اليوم 301", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 302, "title": "اليوم 302", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 303, "title": "اليوم 303", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 304, "title": "اليوم 304", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 305, "title": "اليوم 305", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 306, "title": "اليوم 306", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 307, "title": "اليوم 307", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 308, "title": "اليوم 308", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 309, "title": "اليوم 309", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 310, "title": "اليوم 310", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 311, "title": "اليوم 311", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 312, "title": "اليوم 312", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 313, "title": "اليوم 313", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 314, "title": "اليوم 314", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 315, "title": "اليوم 315", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 316, "title": "اليوم 316", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 317, "title": "اليوم 317", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 318, "title": "اليوم 318", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 319, "title": "اليوم 319", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 320, "title": "اليوم 320", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 321, "title": "اليوم 321", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 322, "title": "اليوم 322", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 323, "title": "اليوم 323", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 324, "title": "اليوم 324", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 325, "title": "اليوم 325", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 326, "title": "اليوم 326", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 327, "title": "اليوم 327", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 328, "title": "اليوم 328", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 329, "title": "اليوم 329", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 330, "title": "اليوم 330", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 331, "title": "اليوم 331", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 332, "title": "اليوم 332", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 333, "title": "اليوم 333", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 334, "title": "اليوم 334", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 335, "title": "اليوم 335", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 336, "title": "اليوم 336", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 337, "title": "اليوم 337", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 338, "title": "اليوم 338", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 339, "title": "اليوم 339", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 340, "title": "اليوم 340", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 341, "title": "اليوم 341", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 342, "title": "اليوم 342", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 343, "title": "اليوم 343", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 344, "title": "اليوم 344", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 345, "title": "اليوم 345", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 346, "title": "اليوم 346", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 347, "title": "اليوم 347", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 348, "title": "اليوم 348", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 349, "title": "اليوم 349", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 350, "title": "اليوم 350", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 351, "title": "اليوم 351", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 352, "title": "اليوم 352", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 353, "title": "اليوم 353", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 354, "title": "اليوم 354", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 355, "title": "اليوم 355", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 356, "title": "اليوم 356", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 357, "title": "اليوم 357", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 358, "title": "اليوم 358", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 359, "title": "اليوم 359", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 360, "title": "اليوم 360", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 361, "title": "اليوم 361", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 362, "title": "اليوم 362", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 363, "title": "اليوم 363", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 364, "title": "اليوم 364", "body": "هذه الرسالة لم تُكتب بعد."}, {"day": 365, "title": "اليوم 365", "body": "هذه الرسالة لم تُكتب بعد."}];
+const $=id=>document.getElementById(id);
+const screens=["intro","home","letter","goodbye","locked"];
+
+const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[Number(d)]);
+const show=id=>{screens.forEach(s=>$(s).classList.toggle("hidden",s!==id));window.scrollTo({top:0,behavior:"smooth"})};
+const unlocked=()=>1;
+const progress=d=>Math.max(0,Math.min(100,d/TOTAL*100));
+const key=d=>`day-complete-${d}`;
+const isDone=d=>localStorage.getItem(key(d))==="yes";
+
+function showHome(){
+  const d=unlocked();
+  if(!d){show("locked");return;}
+  $("homeTitle").textContent=`اليوم ${ar(d)} من ${ar(TOTAL)}`;
+  $("homeFill").style.width=progress(d)+"%";
+  $("openBtn").classList.toggle("hidden",isDone(d));
+  $("completed").classList.toggle("hidden",!isDone(d));
+  $("status").textContent=isDone(d)?"رسالة اليوم أخذت وقتها.":"هناك رسالة واحدة فقط تنتظرك اليوم.";
+  show("home");
+}
+
+function openToday(){
+  const d=unlocked();
+  if(!d)return;
+  const m=messages[d-1];
+  $("counter").textContent=`اليوم ${ar(d)} من ${ar(TOTAL)}`;
+  $("letterFill").style.width=progress(d)+"%";
+  const date=new Date(START_DATE);
+  date.setDate(date.getDate()+d-1);
+  $("date").textContent=new Intl.DateTimeFormat("ar-SA",{day:"numeric",month:"long",year:"numeric"}).format(date);
+  $("title").textContent=m.title;
+  $("body").textContent=m.body;
+  $("heart").textContent=isDone(d)?"♥":"♡";
+  show("letter");
+}
+
+$("begin").onclick=showHome;
+$("openBtn").onclick=openToday;
+$("done").onclick=()=>{
+  const d=unlocked();
+  $("heart").textContent="♥";
+  localStorage.setItem(key(d),"yes");
+  setTimeout(()=>{
+    show("goodbye");
+    setTimeout(showHome,2400);
+  },450);
+};
+
+/* Built-in soft piano using Web Audio */
+let ctx=null,playing=false,timer=null,step=0;
+const sequence=[
+  [261.63,329.63,392.00],
+  [220.00,261.63,329.63],
+  [174.61,220.00,261.63],
+  [196.00,246.94,293.66]
+];
+function pianoNote(freq,start,duration,vol=.035){
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+  osc.type="sine";
+  osc.frequency.value=freq;
+  gain.gain.setValueAtTime(0.0001,start);
+  gain.gain.exponentialRampToValueAtTime(vol,start+.05);
+  gain.gain.exponentialRampToValueAtTime(0.0001,start+duration);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start(start);osc.stop(start+duration+.05);
+}
+function playChord(){
+  if(!playing||!ctx)return;
+  const now=ctx.currentTime;
+  const chord=sequence[step%sequence.length];
+  chord.forEach((f,i)=>pianoNote(f,now+i*.09,2.4,.025));
+  pianoNote(chord[0]/2,now,2.8,.018);
+  step++;
+}
+$("musicToggle").onclick=async()=>{
+  if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();
+  if(ctx.state==="suspended")await ctx.resume();
+  playing=!playing;
+  $("musicToggle").classList.toggle("on",playing);
+  $("musicToggle").textContent=playing?"♫":"♪";
+  if(playing){
+    playChord();
+    timer=setInterval(playChord,3000);
+  }else{
+    clearInterval(timer);
+  }
+};
+</script>
+</body>
+</html>
