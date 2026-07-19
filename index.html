@@ -3,63 +3,84 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#070707">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="365 يومًا لك">
-<meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="icon" href="icon-192.png">
-<title>365 يومًا لك</title>
+<meta name="theme-color" content="#050505">
+<title>365 Days For You</title>
 <style>
-:root{--black:#050505;--paper:#f0e9df;--ink:#1d1916;--white:#f8f5f0;--muted:#aaa49d;--gold:#c9aa72;--gold2:#ead7ad;--safeT:env(safe-area-inset-top);--safeB:env(safe-area-inset-bottom)}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth;background:#050505}body{margin:0;background:#050505;color:var(--white);font-family:"SF Arabic","Geeza Pro",Tahoma,Arial,sans-serif;overflow-x:hidden;min-height:100svh}button{font:inherit;cursor:pointer}.hidden{display:none!important}.screen{min-height:100svh;position:relative;width:100%;padding-top:var(--safeT);padding-bottom:var(--safeB)}
-.grain{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.14;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.11'/%3E%3C/svg%3E")}.topActions{position:fixed;top:calc(14px + var(--safeT));left:14px;z-index:110;display:flex;gap:8px}.roundBtn{width:42px;height:42px;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:rgba(10,10,10,.52);backdrop-filter:blur(14px);color:#fff;display:grid;place-items:center;font-size:1rem}
-/* intro */
-.intro{display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 42%,#241d14 0,transparent 31%),linear-gradient(#000,#090909 72%,#000)}.stars:before,.stars:after{content:"";position:absolute;inset:-20%;background-image:radial-gradient(circle,rgba(255,255,255,.75) 0 1px,transparent 1.35px);background-size:74px 74px;opacity:.14;animation:drift 19s linear infinite}.stars:after{background-size:121px 121px;opacity:.08;animation-duration:30s}@keyframes drift{to{transform:translate(80px,-100px)}}
-.balloonScene{position:absolute;inset:0;overflow:hidden}.balloon{position:absolute;width:clamp(82px,23vw,150px);aspect-ratio:.84/1;border-radius:52% 48% 50% 50%/45% 46% 54% 55%;background:radial-gradient(circle at 34% 27%,rgba(255,255,255,.25),transparent 16%),linear-gradient(145deg,#3a3123,#0c0b09 66%);box-shadow:inset -18px -22px 35px #000,0 22px 55px rgba(0,0,0,.65),0 0 38px rgba(201,170,114,.12);opacity:0;animation:rise 8s ease-in-out infinite}.balloon:after{content:"";position:absolute;left:50%;bottom:-120px;width:1px;height:125px;background:linear-gradient(rgba(234,215,173,.65),transparent)}.balloon:nth-child(1){left:8%;bottom:-35%;animation-delay:.2s}.balloon:nth-child(2){left:72%;bottom:-38%;animation-delay:1.1s;transform:scale(.75)}.balloon:nth-child(3){left:42%;bottom:-42%;animation-delay:2.2s;transform:scale(.6)}@keyframes rise{0%{opacity:0;transform:translateY(0) rotate(-3deg)}15%{opacity:.8}75%{opacity:.55}100%{opacity:0;transform:translateY(-135svh) rotate(5deg)}}
-.introCenter{position:relative;z-index:4;text-align:center;width:min(88vw,700px);padding:30px}.introMark{width:76px;height:76px;margin:0 auto 28px;border:1px solid rgba(201,170,114,.45);border-radius:22px;display:grid;place-items:center;color:var(--gold2);font-family:Georgia,serif;font-size:1.55rem;box-shadow:0 0 55px rgba(201,170,114,.08);animation:fadeUp 1.3s both}.intro h1{font-size:clamp(2rem,9vw,4.4rem);font-weight:300;margin:0 0 22px;letter-spacing:.02em;animation:fadeUp 1.25s .25s both}.introLead{font-size:clamp(1.05rem,4.3vw,1.35rem);line-height:2.1;color:#d5cfc6;margin:0;animation:fadeUp 1.25s .55s both}.primary{margin-top:38px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(255,255,255,.045);color:#fff;padding:14px 34px;min-width:138px;animation:fadeUp 1.2s .9s both}.primary:active{transform:scale(.98)}@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+:root{--black:#050505;--ivory:#f3ede3;--ink:#1e1915;--gold:#c7a568;--gold2:#ead8af;--muted:#aaa39a;--safeT:env(safe-area-inset-top);--safeB:env(safe-area-inset-bottom)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;background:#050505;color:#f8f4ed;font-family:"SF Arabic","Geeza Pro",Tahoma,Arial,sans-serif;min-height:100%;overflow-x:hidden}button{font:inherit;cursor:pointer}.hidden{display:none!important}.screen{position:relative;min-height:100svh;width:100%;padding-top:var(--safeT);padding-bottom:var(--safeB)}
+.grain{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.11'/%3E%3C/svg%3E")}.stars:before,.stars:after{content:"";position:absolute;inset:-20%;background-image:radial-gradient(circle,rgba(255,255,255,.7) 0 1px,transparent 1.3px);background-size:76px 76px;opacity:.12;animation:drift 20s linear infinite}.stars:after{background-size:125px 125px;opacity:.06;animation-duration:31s}@keyframes drift{to{transform:translate(80px,-100px)}}
+.ltr{direction:ltr;unicode-bidi:isolate}.primary{border:1px solid rgba(255,255,255,.34);border-radius:999px;background:rgba(255,255,255,.055);color:#fff;padding:14px 34px;min-width:150px}.primary:active{transform:scale(.98)}
+/* opening gate */
+.gate{display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 50% 42%,rgba(199,165,104,.14),transparent 30%),#050505}.gateBox{padding:28px;width:min(92vw,650px)}.brand{font-family:Georgia,serif;color:var(--gold2);letter-spacing:.06em;font-size:clamp(1rem,3vw,1.25rem);margin-bottom:38px}.gate h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(2.1rem,7vw,4.8rem);margin:0 0 18px;direction:ltr}.headphones{font-size:2rem;margin:20px 0}.gate p{color:#d4cec5;margin-bottom:30px}
+/* intro balloons */
+.intro{display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 42%,#241d14 0,transparent 31%),linear-gradient(#000,#090909 72%,#000)}.balloonScene{position:absolute;inset:0;overflow:hidden}.balloon{position:absolute;width:clamp(82px,23vw,150px);aspect-ratio:.84/1;border-radius:52% 48% 50% 50%/45% 46% 54% 55%;background:radial-gradient(circle at 34% 27%,rgba(255,255,255,.25),transparent 16%),linear-gradient(145deg,#3a3123,#0c0b09 66%);box-shadow:inset -18px -22px 35px #000,0 22px 55px rgba(0,0,0,.65),0 0 38px rgba(201,170,114,.12);opacity:0;animation:rise 8s ease-in-out infinite}.balloon:after{content:"";position:absolute;left:50%;bottom:-120px;width:1px;height:125px;background:linear-gradient(rgba(234,215,173,.65),transparent)}.balloon:nth-child(1){left:8%;bottom:-35%;animation-delay:.2s}.balloon:nth-child(2){left:72%;bottom:-38%;animation-delay:1.1s;transform:scale(.75)}.balloon:nth-child(3){left:42%;bottom:-42%;animation-delay:2.2s;transform:scale(.6)}@keyframes rise{0%{opacity:0;transform:translateY(0) rotate(-3deg)}15%{opacity:.8}75%{opacity:.55}100%{opacity:0;transform:translateY(-135svh) rotate(5deg)}}
+.introCenter{position:relative;z-index:4;text-align:center;width:min(90vw,700px);padding:30px}.introMark{width:76px;height:76px;margin:0 auto 28px;border:1px solid rgba(199,165,104,.45);border-radius:22px;display:grid;place-items:center;color:var(--gold2);font-family:Georgia,serif;font-size:1.55rem;box-shadow:0 0 55px rgba(199,165,104,.08);animation:fadeUp 1.2s both}.intro h1{font-size:clamp(2rem,9vw,4.4rem);font-weight:300;margin:0 0 22px;animation:fadeUp 1.2s .2s both}.introLead{font-size:clamp(1.05rem,4.3vw,1.35rem);line-height:2.1;color:#d5cfc6;margin:0;animation:fadeUp 1.2s .5s both}.intro .primary{margin-top:36px;animation:fadeUp 1.2s .85s both}@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 /* welcome */
-.welcome{display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 50% 28%,rgba(201,170,114,.13),transparent 34%),#070707}.welcomeCard{width:min(100%,620px);padding:clamp(36px,9vw,78px) clamp(24px,7vw,64px);text-align:center;border:1px solid rgba(201,170,114,.28);background:linear-gradient(145deg,rgba(255,255,255,.048),rgba(255,255,255,.012));box-shadow:0 35px 100px rgba(0,0,0,.56);border-radius:26px;animation:fadeUp 1.1s both}.kicker{color:var(--gold);letter-spacing:.11em;font-size:.82rem}.welcomeCard h2{font-weight:300;font-size:clamp(1.8rem,7vw,2.8rem);margin:19px 0 26px}.welcomeCard p{color:#d6d0c8;line-height:2.05;font-size:1.05rem;margin:7px 0}.welcomeBtn{margin-top:29px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(255,255,255,.05);color:#fff;padding:14px 32px}
-/* home */
-.home{display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 50% 27%,rgba(201,170,114,.105),transparent 32%),#070707}.homeBox{width:min(100%,590px);text-align:center}.home h1{font-size:clamp(2rem,8vw,3.45rem);font-weight:300;margin:16px 0}.track{height:2px;background:rgba(255,255,255,.11);margin:30px 0 24px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#79613d,var(--gold),#efdfba);transition:width .8s ease}.status{color:var(--muted);line-height:1.95;min-height:58px}.openBtn{margin-top:12px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(255,255,255,.035);color:#fff;padding:14px 30px}.homeLinks{display:flex;justify-content:center;gap:14px;margin-top:30px}.textBtn{border:0;background:none;color:#aaa49d;padding:9px;border-bottom:1px solid rgba(255,255,255,.15)}.completed{margin-top:24px;color:#d4cec5}.completed .heartBig{font-size:2rem;margin:0}
+.welcome{display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 50% 28%,rgba(199,165,104,.13),transparent 34%),#070707}.welcomeCard{width:min(100%,640px);padding:clamp(36px,9vw,78px) clamp(24px,7vw,64px);text-align:center;border:1px solid rgba(199,165,104,.32);background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.012));box-shadow:0 35px 100px rgba(0,0,0,.58);border-radius:26px;animation:fadeUp 1.05s both}.kicker{color:var(--gold);letter-spacing:.07em;font-size:.88rem}.welcomeCard h2{font-weight:300;font-size:clamp(1.9rem,7vw,3rem);margin:19px 0 26px}.welcomeCard p{color:#d6d0c8;line-height:2.05;font-size:1.05rem;margin:7px 0}.welcomeCard .primary{margin-top:29px}
+/* envelope */
+.envelopeScreen{display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 50% 28%,rgba(199,165,104,.11),transparent 36%),#070707}.envelopeWrap{text-align:center;width:min(94vw,760px)}.dayLabel{color:var(--gold2);margin-bottom:24px}.envelope{position:relative;width:min(86vw,600px);aspect-ratio:1.55;margin:auto;background:#e8dece;border-radius:12px;box-shadow:0 34px 90px rgba(0,0,0,.62);overflow:hidden;cursor:pointer;transform-style:preserve-3d}.envelope:before,.envelope:after{content:"";position:absolute;inset:0}.envelope:before{background:linear-gradient(32deg,transparent 49.5%,#f3ebdf 50%) left/50% 100% no-repeat,linear-gradient(-32deg,transparent 49.5%,#eee4d4 50%) right/50% 100% no-repeat;z-index:3}.envelope:after{clip-path:polygon(0 0,100% 0,50% 61%);background:#f7f0e5;z-index:4;transform-origin:top;transition:transform .9s cubic-bezier(.2,.75,.2,1),z-index 0s .45s}.envelope.open:after{transform:rotateX(180deg);z-index:1}.paperPeek{position:absolute;left:8%;right:8%;top:9%;height:82%;background:var(--ivory);color:var(--ink);padding:30px;border-radius:5px;z-index:2;text-align:right;overflow:hidden;transform:translateY(42%);opacity:0;transition:transform 1s .35s cubic-bezier(.2,.75,.2,1),opacity .45s .5s}.envelope.open .paperPeek{transform:translateY(-4%);opacity:1}.seal{position:absolute;z-index:6;left:50%;top:48%;transform:translate(-50%,-50%) rotate(-4deg);width:86px;height:86px;display:grid;place-items:center;color:#fff3c9;font-family:Georgia,serif;font-size:1.04rem;font-weight:700;letter-spacing:.055em;text-shadow:0 1px 1px rgba(83,46,5,.7);background:radial-gradient(circle at 35% 27%,rgba(255,241,177,.95) 0 4%,rgba(255,220,119,.45) 5% 12%,transparent 13%),radial-gradient(circle at 46% 40%,#d8a442 0 36%,#bd8124 59%,#8d5610 79%,#633707 100%);clip-path:polygon(50% 0%,60% 5%,69% 2%,77% 10%,87% 12%,89% 23%,97% 30%,94% 40%,100% 50%,94% 60%,97% 70%,88% 77%,86% 88%,76% 90%,68% 98%,59% 94%,50% 100%,41% 95%,31% 98%,23% 90%,13% 87%,11% 77%,3% 70%,6% 60%,0% 50%,6% 40%,3% 30%,11% 23%,13% 13%,24% 10%,31% 2%,41% 5%);box-shadow:inset 3px 4px 7px rgba(255,235,157,.42),inset -8px -10px 15px rgba(79,42,3,.48),0 11px 22px rgba(37,20,4,.52),0 0 0 1px rgba(94,54,8,.34);transition:opacity .35s,transform .35s}.seal:before{content:"";position:absolute;inset:12px;border-radius:50%;border:1.5px solid rgba(255,232,167,.58);box-shadow:inset 0 0 0 2px rgba(93,52,7,.18),0 0 0 1px rgba(91,52,8,.2)}.seal:after{content:"";position:absolute;inset:19px;border-radius:50%;background:radial-gradient(circle at 38% 31%,rgba(255,229,151,.2),transparent 35%);box-shadow:inset 2px 2px 4px rgba(255,235,174,.18),inset -3px -4px 5px rgba(85,46,5,.28);z-index:-1}.envelope.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.3) rotate(-8deg)}.hint{color:var(--gold2);margin-top:27px}
 /* letter */
-.letter{background:radial-gradient(circle at 50% -18%,rgba(201,170,114,.14),transparent 42%),#090909;padding:72px 10px 50px}.stage{width:min(100%,820px);margin:auto}.header{padding:0 9px 19px}.header small{color:var(--gold)}.header h2{font-weight:300;margin:11px 0}.page{color:var(--ink);background:linear-gradient(90deg,rgba(0,0,0,.038),transparent 8%,transparent 93%,rgba(0,0,0,.042)),repeating-linear-gradient(0deg,rgba(70,54,38,.018) 0 1px,transparent 1px 4px),var(--paper);border-radius:4px 17px 17px 4px;box-shadow:0 32px 95px rgba(0,0,0,.62),inset 22px 0 30px rgba(91,68,45,.055);animation:pageOpen 1s both}@keyframes pageOpen{from{opacity:0;transform:perspective(1200px) rotateY(-13deg) translateY(18px)}to{opacity:1;transform:none}}.content{padding:clamp(30px,7vw,70px) clamp(23px,8vw,78px)}.date{color:#7f7468;font-size:.87rem}.content h3{font-size:clamp(1.65rem,5.7vw,2.45rem);font-weight:600}.body{white-space:pre-line;font-size:clamp(1.06rem,4vw,1.22rem);line-height:2.3}.mediaBox{margin-top:34px;border:1px dashed rgba(54,44,36,.25);padding:20px;border-radius:14px;text-align:center;color:#6f655c}.doneWrap{display:flex;justify-content:center;padding-top:50px}.done{border:0;background:none;color:#2c2723;display:flex;gap:9px;align-items:center;opacity:.72}.done b{font-size:1.55rem}.backBtn{position:absolute;right:18px;top:calc(15px + var(--safeT));z-index:5;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(0,0,0,.3);color:#fff;padding:10px 14px}
-/* goodbye */
-.goodbye{display:grid;place-items:center;text-align:center;padding:28px;background:radial-gradient(circle at 50% 44%,rgba(201,170,114,.11),transparent 31%),#070707}.goodbyeBox{animation:fadeUp 1.15s both}.goodbye p{font-size:clamp(1.6rem,7vw,2.9rem);margin:0 0 18px}.goodbye small{display:block;color:var(--muted);font-size:clamp(.98rem,3.5vw,1.12rem);line-height:2}.goodbye button{margin-top:34px}
-/* archive */
-.archive{padding:76px 18px 50px;background:radial-gradient(circle at 50% 0,rgba(201,170,114,.1),transparent 28%),#070707}.archiveInner{width:min(100%,820px);margin:auto}.archiveHead{text-align:center;margin-bottom:28px}.archiveHead h2{font-weight:300;font-size:2.2rem}.days{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(min-width:620px){.days{grid-template-columns:repeat(7,1fr)}}.dayBtn{aspect-ratio:1;border-radius:15px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.025);color:#ddd;display:grid;place-items:center;position:relative}.dayBtn.read{border-color:rgba(201,170,114,.35);color:var(--gold2)}.dayBtn.lockedDay{opacity:.28}.dayBtn.today:after{content:"";position:absolute;bottom:8px;width:4px;height:4px;border-radius:50%;background:var(--gold)}
-.locked{display:grid;place-items:center;text-align:center;padding:25px;background:#070707}.locked p{color:var(--muted);line-height:1.9}.lockDate{color:var(--gold2)!important;font-size:1.12rem}.installHint{position:fixed;left:14px;right:14px;bottom:calc(14px + var(--safeB));z-index:120;background:rgba(20,18,16,.94);backdrop-filter:blur(20px);border:1px solid rgba(201,170,114,.3);border-radius:18px;padding:16px 18px;box-shadow:0 20px 60px #000;display:flex;align-items:center;gap:13px}.installHint img{width:48px;height:48px;border-radius:12px}.installHint p{margin:0;font-size:.92rem;line-height:1.6;color:#ddd}.installHint button{margin-right:auto;border:0;background:none;color:#aaa;font-size:1.2rem}
-@media(max-width:390px){.days{grid-template-columns:repeat(4,1fr)}.introCenter{padding:20px}.content{padding-inline:21px}}
+.letterScreen{background:radial-gradient(circle at 50% -18%,rgba(199,165,104,.14),transparent 42%),#090909;padding:60px 12px 50px}.letterStage{width:min(100%,820px);margin:auto}.paper{color:var(--ink);background:linear-gradient(90deg,rgba(0,0,0,.038),transparent 8%,transparent 93%,rgba(0,0,0,.042)),repeating-linear-gradient(0deg,rgba(70,54,38,.018) 0 1px,transparent 1px 4px),var(--ivory);border-radius:5px 17px 17px 5px;box-shadow:0 32px 95px rgba(0,0,0,.62),inset 22px 0 30px rgba(91,68,45,.055);animation:pageOpen 1s both}@keyframes pageOpen{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}.paperContent{padding:clamp(30px,7vw,70px) clamp(23px,8vw,78px)}.paper h2{font-size:clamp(1.65rem,5.7vw,2.45rem);margin:0 0 26px}.body{white-space:pre-line;font-size:clamp(1.04rem,3.5vw,1.2rem);line-height:2.15;text-align:right}.finish{display:flex;justify-content:center;margin-top:44px}.heartBtn{border:0;background:none;color:#3d332b;font-size:2.2rem;opacity:.75}.letterHint{text-align:center;color:var(--gold2);margin-top:24px}
+/* completed */
+.complete{display:grid;place-items:center;text-align:center;padding:28px;background:radial-gradient(circle at 50% 44%,rgba(199,165,104,.11),transparent 31%),#070707}.completeBox{animation:fadeUp 1s both}.complete h2{font-family:Georgia,serif;font-weight:400;font-size:clamp(1.8rem,6vw,3.2rem);direction:ltr;margin:0 0 20px}.remaining{direction:ltr;unicode-bidi:isolate;font-family:Georgia,serif;font-size:clamp(1.25rem,4vw,2rem);color:#eee4d7}.signature{margin-top:34px;color:#aaa39a;font-size:.9rem}
+.soundBtn{position:fixed;top:calc(14px + var(--safeT));left:14px;z-index:120;width:42px;height:42px;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:rgba(10,10,10,.52);color:#fff;display:grid;place-items:center}
+@media(max-width:480px){.paperPeek{padding:18px}.seal{width:72px;height:72px}.body{line-height:2}.gate h1{font-size:2.2rem}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-delay:0s!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div class="grain"></div>
-<div class="topActions"><button id="soundBtn" class="roundBtn" aria-label="الصوت">♪</button></div>
+<button id="soundBtn" class="soundBtn hidden" aria-label="تشغيل أو كتم الصوت">♫</button>
+<audio id="music" src="assets/365-days-for-you-full.mp3" preload="auto" loop></audio>
 
-<section id="intro" class="screen intro">
-  <div class="stars"></div><div class="balloonScene"><i class="balloon"></i><i class="balloon"></i><i class="balloon"></i></div>
-  <div class="introCenter"><div class="introMark">365</div><h1>لـ بسام…</h1><p class="introLead">هذه ليست مجرد رسائل…<br>بل سنة كاملة، كُتبت من أجلك.</p><button id="begin" class="primary">ابدأ 🤍</button></div>
+<section id="gate" class="screen gate">
+  <div class="gateBox">
+    <div class="brand ltr">365 Days For You</div>
+    <p>هذه التجربة صُنعت لك وحدك.</p>
+    <button id="startExperience" class="primary">ابدأ 🤍</button>
+  </div>
 </section>
 
-<section id="welcome" class="screen welcome hidden"><div class="welcomeCard"><p class="kicker">لـ بسام وحده</p><h2>هذا المكان صُنع لك وحدك.</h2><p>كل يوم ستجد رسالة جديدة بانتظارك.</p><p>لا تستعجل… استمتع بكل يوم كما كُتب لك. 🤍</p><button id="welcomeContinue" class="welcomeBtn">ابدأ الرحلة</button></div></section>
+<section id="intro" class="screen intro hidden">
+  <div class="stars"></div>
+  <div class="balloonScene"><i class="balloon"></i><i class="balloon"></i><i class="balloon"></i></div>
+  <div class="introCenter">
+    <div class="introMark">365</div>
+    <h1>لـ بسام…</h1>
+    <p class="introLead">هذه ليست مجرد رسائل…<br>بل سنة كاملة، كُتبت من أجلك.</p>
+    <button id="introContinue" class="primary">ابدأ 🤍</button>
+  </div>
+</section>
 
-<section id="home" class="screen home hidden"><div class="homeBox"><p class="kicker">365 يومًا لك</p><h1 id="homeTitle"></h1><div class="track"><div id="homeFill" class="fill"></div></div><p id="status" class="status"></p><button id="openBtn" class="openBtn">افتح رسالة اليوم</button><div id="completed" class="completed hidden"><p class="heartBig">♥</p><p>انتهت رسالة اليوم.</p><small id="homeRemaining"></small></div><div class="homeLinks"><button id="archiveBtn" class="textBtn">الرسائل السابقة</button><button id="installBtn" class="textBtn">إضافة كأيقونة</button></div></div></section>
+<section id="welcome" class="screen welcome hidden">
+  <div class="welcomeCard">
+    <p class="kicker">لـ بسام وحده</p>
+    <h2>هذا المكان صُنع لك وحدك.</h2>
+    <p>كل يوم ستجد رسالة جديدة بانتظارك.</p>
+    <p>لا تستعجل… استمتع بكل يوم كما كُتب لك. 🤍</p>
+    <button id="journey" class="primary">ابدأ الرحلة</button>
+  </div>
+</section>
 
-<section id="letter" class="screen letter hidden"><button id="letterBack" class="backBtn">رجوع</button><div class="stage"><header class="header"><small>365 يومًا لك</small><h2 id="counter"></h2><div class="track"><div id="letterFill" class="fill"></div></div></header><article class="page"><div class="content"><p id="date" class="date"></p><h3 id="title"></h3><div id="body" class="body"></div><div id="media" class="mediaBox hidden"></div><div class="doneWrap"><button id="done" class="done"><b id="heart">♡</b><span>تم</span></button></div></div></article></div></section>
+<section id="envelopeScreen" class="screen envelopeScreen hidden">
+  <div class="envelopeWrap">
+    <p class="dayLabel">اليوم الأول من 365</p>
+    <div id="envelope" class="envelope" role="button" tabindex="0" aria-label="افتح الظرف">
+      <div class="paperPeek"><strong>إلى بسام،</strong><br><br>هذه رسالتك الأولى…</div>
+      <div class="seal">365</div>
+    </div>
+    <p id="envelopeHint" class="hint">المس الظرف لفتح رسالة اليوم</p>
+  </div>
+</section>
 
-<section id="goodbye" class="screen goodbye hidden"><div class="goodbyeBox"><p id="goodbyeTitle"></p><small id="goodbyeRemaining"></small><button id="goodbyeHome" class="primary">إغلاق</button></div></section>
-<section id="archive" class="screen archive hidden"><button id="archiveBack" class="backBtn">رجوع</button><div class="archiveInner"><div class="archiveHead"><p class="kicker">الرحلة حتى الآن</p><h2>الرسائل</h2><p id="archiveStatus" class="status"></p></div><div id="days" class="days"></div></div></section>
-<section id="locked" class="screen locked hidden"><div><p class="kicker">365 يومًا لك</p><h2>موعدنا قريب…</h2><p>تبدأ أول رسالة يوم</p><p class="lockDate">27 يوليو 2026</p><button id="previewBtn" class="textBtn">معاينة النسخة</button></div></section>
-<div id="installHint" class="installHint hidden"><img src="icon-180.png" alt=""><p>من زر المشاركة في Safari اختَر<br><b>إضافة إلى الشاشة الرئيسية</b></p><button id="closeHint">×</button></div>
+<section id="letter" class="screen letterScreen hidden">
+  <div class="letterStage">
+    <article class="paper">
+      <div class="paperContent">
+        <h2>اليوم الأول 🤍</h2>
+        <div class="body">قبل أي شيء…
 
-<script>
-const START=new Date("2026-07-27T00:00:00+03:00"),TOTAL=365;
-const firstMessage={title:"اليوم الأول 🤍",body:`قبل أي شيء…
-
-أتمنى من كل قلبي أن تكون هذه السنة الجديدة من عمرك أخف، وأجمل، وأهدأ من كل السنوات التي سبقتها. وأن ترى فيها كل الأشياء الجميلة التي تستحقها، ويحقق الله لك فيها ما تتمناه وأكثر.
+أتمنى من كل قلبي أن تكون هذه السنة الجديدة من عمرك أخف، وأجمل، وأسعد وأهدأ من كل السنوات التي سبقتها. وأن تشوف فيها كل الأشياء الجميلة الي تستحقها، ويحقق الله لك فيها ما تتمناه وأكثر.
 
 إذا أنت تقرأ هذه الرسالة الآن…
 
@@ -73,7 +94,7 @@ const firstMessage={title:"اليوم الأول 🤍",body:`قبل أي شيء�
 
 بعض الرسائل بتضحكك…
 وبعضها بتشجعك…
-وبعضها يمكن يجيك في الوقت اللي تحتاج تسمعه فيه بالضبط.
+وبعضها يمكن تجيك في الوقت اللي تحتاج تسمع فيه شي يريحك .
 وبعضها ما بيكون إلا تذكير بسيط تهتم فيه بنفسك، أو يخليك تبتسم بدون سبب.
 
 لكن في شيء واحد ثابت في كل الرسائل…
@@ -92,25 +113,36 @@ const firstMessage={title:"اليوم الأول 🤍",body:`قبل أي شيء�
 
 كل عام وأنت بخير يا حبيبي…
 
-وأتمنى أكون سببًا، ولو لابتسامة واحدة… في كل يوم من سنتك الجديدة. 🤍`};
-const messages=Array.from({length:TOTAL},(_,i)=>i===0?firstMessage:{title:`اليوم ${i+1}`,body:"هذه الرسالة ستُكتب هنا قريبًا. 🤍"});
-const $=id=>document.getElementById(id),screens=["intro","welcome","home","letter","goodbye","archive","locked"];
-const qs=new URLSearchParams(location.search);let preview=qs.get("preview")==="1",selectedDay=1,audioOn=false,audioCtx=null;
-const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[+d]);
-const show=id=>{screens.forEach(x=>$(x).classList.toggle("hidden",x!==id));scrollTo({top:0,behavior:"smooth"})};
-function unlocked(){if(preview)return 1;const diff=Date.now()-START.getTime();return diff<0?0:Math.min(TOTAL,Math.floor(diff/86400000)+1)}
-const doneKey=d=>`bassam365-done-${d}`,isDone=d=>localStorage.getItem(doneKey(d))==="yes",pct=d=>Math.max(0,Math.min(100,d/TOTAL*100));
-function remainingText(d){const r=TOTAL-d;return d>=TOTAL?"هذه آخر رسالة… لكن ليست نهاية ما بيننا. 🤍":`بقي ${ar(r)} رسالة تنتظرك. 🤍`}
-function home(){const d=unlocked();if(!d){show("locked");return}$("homeTitle").textContent=`اليوم ${ar(d)} من ${ar(TOTAL)}`;$("homeFill").style.width=pct(d)+"%";$("openBtn").classList.toggle("hidden",isDone(d));$("completed").classList.toggle("hidden",!isDone(d));$("status").textContent=isDone(d)?"رسالة اليوم أخذت وقتها.":"هناك رسالة واحدة فقط تنتظرك اليوم.";$("homeRemaining").textContent=remainingText(d);show("home")}
-function openDay(d){if(d>unlocked())return;selectedDay=d;const m=messages[d-1];$("counter").textContent=`اليوم ${ar(d)} من ${ar(TOTAL)}`;$("letterFill").style.width=pct(d)+"%";const dt=new Date(START);dt.setDate(dt.getDate()+d-1);$("date").textContent=new Intl.DateTimeFormat("ar-SA",{day:"numeric",month:"long",year:"numeric"}).format(dt);$("title").textContent=m.title;$("body").textContent=m.body;$("heart").textContent=isDone(d)?"♥":"♡";$("done").classList.toggle("hidden",d<unlocked()&&isDone(d));show("letter")}
-function finishDay(){localStorage.setItem(doneKey(selectedDay),"yes");$("heart").textContent="♥";if(selectedDay>=TOTAL){$("goodbyeTitle").textContent="هذه آخر رسالة…";$("goodbyeRemaining").textContent="لكن ليست نهاية ما بيننا. 🤍"}else{$("goodbyeTitle").textContent="انتهت رسالة اليوم.";$("goodbyeRemaining").textContent=remainingText(selectedDay)}setTimeout(()=>show("goodbye"),350)}
-function renderArchive(){const u=unlocked();$("archiveStatus").textContent=`فُتح حتى الآن ${ar(u)} من ${ar(TOTAL)} يومًا.`;$("days").innerHTML="";for(let d=1;d<=TOTAL;d++){const b=document.createElement("button");b.className="dayBtn"+(isDone(d)?" read":"")+(d>u?" lockedDay":"")+(d===u?" today":"");b.textContent=ar(d);b.disabled=d>u;b.onclick=()=>openDay(d);$("days").appendChild(b)}show("archive")}
-function welcomeFlow(){localStorage.setItem("bassam365-seen-intro","yes");if(localStorage.getItem("bassam365-seen-welcome")!=="yes")show("welcome");else home()}
-function installHint(){if(navigator.standalone){alert("الأيقونة مضافة بالفعل 🤍");return}$("installHint").classList.remove("hidden")}
-function toggleSound(){audioOn=!audioOn;$("soundBtn").textContent=audioOn?"♫":"♪";if(!audioOn){if(audioCtx)audioCtx.close();audioCtx=null;return}audioCtx=new(window.AudioContext||window.webkitAudioContext)();const now=audioCtx.currentTime;[261.63,329.63,392,523.25].forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.025,now+i*.5+.1);g.gain.exponentialRampToValueAtTime(.0001,now+i*.5+2.4);o.connect(g).connect(audioCtx.destination);o.start(now+i*.5);o.stop(now+i*.5+2.5)})}
-$("begin").onclick=welcomeFlow;$("welcomeContinue").onclick=()=>{localStorage.setItem("bassam365-seen-welcome","yes");home()};$("openBtn").onclick=()=>openDay(unlocked());$("done").onclick=finishDay;$("letterBack").onclick=()=>selectedDay===unlocked()?home():renderArchive();$("archiveBtn").onclick=renderArchive;$("archiveBack").onclick=home;$("goodbyeHome").onclick=home;$("installBtn").onclick=installHint;$("closeHint").onclick=()=>$("installHint").classList.add("hidden");$("soundBtn").onclick=toggleSound;$("previewBtn").onclick=()=>{preview=true;localStorage.removeItem("bassam365-seen-intro");localStorage.removeItem("bassam365-seen-welcome");show("intro")};
-if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
-if(localStorage.getItem("bassam365-seen-intro")==="yes"){if(localStorage.getItem("bassam365-seen-welcome")!=="yes")show("welcome");else home()}else show("intro");
+وأتمنى أكون سببًا، ولو لابتسامة واحدة… في كل يوم من سنتك الجديدة. 🤍</div>
+        <div class="finish"><button id="finishLetter" class="heartBtn" aria-label="إنهاء الرسالة">♡</button></div>
+      </div>
+    </article>
+    <p class="letterHint">اقرأ الرسالة… ثم اضغط القلب</p>
+  </div>
+</section>
+
+<section id="complete" class="screen complete hidden">
+  <div class="completeBox">
+    <h2>Message completed.</h2>
+    <p class="remaining">364 letters are still waiting for you.</p>
+    <p class="remaining" style="margin-top:22px;font-size:clamp(1.05rem,3vw,1.45rem)">See you tomorrow 🤍</p>
+    <p class="signature">صُنع بحب… من غفران 🤍</p>
+  </div>
+</section>
+
+<script>
+const ids=["gate","intro","welcome","envelopeScreen","letter","complete"];
+const $=id=>document.getElementById(id);
+const show=id=>{ids.forEach(x=>$(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"})};
+const music=$("music");let muted=false;
+$("startExperience").addEventListener("click",async()=>{music.volume=.18;try{await music.play()}catch(e){}$("soundBtn").classList.remove("hidden");show("intro")});
+$("soundBtn").addEventListener("click",()=>{muted=!muted;music.muted=muted;$("soundBtn").textContent=muted?"♪":"♫"});
+$("introContinue").addEventListener("click",()=>show("welcome"));
+$("journey").addEventListener("click",()=>show("envelopeScreen"));
+let opened=false;
+function openEnvelope(){if(opened)return;opened=true;$("envelope").classList.add("open");$("envelopeHint").textContent="الرسالة تُفتح…";setTimeout(()=>show("letter"),1450)}
+$("envelope").addEventListener("click",openEnvelope);$("envelope").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")openEnvelope()});
+$("finishLetter").addEventListener("click",()=>{$("finishLetter").textContent="♥";setTimeout(()=>show("complete"),500)});
 </script>
 </body>
 </html>
