@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#050505">
 <title>365 Days For You</title>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+
 <style>
 :root{--black:#050505;--ivory:#f3ede3;--ink:#1e1915;--gold:#c7a568;--gold2:#ead8af;--muted:#aaa39a;--safeT:env(safe-area-inset-top);--safeB:env(safe-area-inset-bottom)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;background:#050505;color:#f8f4ed;font-family:"SF Arabic","Geeza Pro",Tahoma,Arial,sans-serif;min-height:100%;overflow-x:hidden}button{font:inherit;cursor:pointer}.hidden{display:none!important}.screen{position:relative;min-height:100svh;width:100%;padding-top:var(--safeT);padding-bottom:var(--safeB)}
@@ -132,6 +137,7 @@
 </div>
 <div id="lockToast" class="lockToast">هذه الرسالة لم يحن وقتها بعد… 🤍</div>
 
+<script src="messages.js?v=10"></script>
 <script>
 const ids=["gate","intro","welcome","envelopeScreen","letter","complete"];
 const $=id=>document.getElementById(id);
@@ -140,18 +146,20 @@ const show=id=>{ids.forEach(x=>$(x).classList.toggle("hidden",x!==id));window.sc
 const START_DATE=new Date(2026,6,27);
 const DAY_MS=86400000;
 const monthNames=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
-const messages={
-  1:{
-    title:"اليوم الأول 🤍",
-    preview:"هذه رسالتك الأولى…",
-    text:'قبل أي شيء…\n\nأتمنى من كل قلبي أن تكون هذه السنة الجديدة من عمرك أخف، وأجمل، وأسعد وأهدأ من كل السنوات التي سبقتها. وأن تشوف فيها كل الأشياء الجميلة الي تستحقها، ويحقق الله لك فيها ما تتمناه وأكثر.\n\nإذا أنت تقرأ هذه الرسالة الآن…\n\nفمعناها أنك بدأت سنة جديدة من عمرك، وحبيت أكون معك بطريقة مختلفة.\n\nيمكن ما أقدر أكون جنبك كل يوم، لكن كنت أبغى ألقى طريقة تحس فيها بوجودي معك، حتى لو كانت مجرد دقائق بسيطة من يومك.\n\nومن هنا بدأت هذه الفكرة…\n\nمن اليوم، ولمدة 365 يومًا، بيكون عندك رسالة جديدة كل صباح.\n\nبعض الرسائل بتضحكك…\nوبعضها بتشجعك…\nوبعضها يمكن تجيك في الوقت اللي تحتاج تسمع فيه شي يريحك.\nوبعضها ما بيكون إلا تذكير بسيط تهتم فيه بنفسك، أو يخليك تبتسم بدون سبب.\n\nلكن في شيء واحد ثابت في كل الرسائل…\n\nكل رسالة هنا مكتوبة لك… ومن أجلك.\n\nأوعدني بشيء واحد فقط…\n\nافتح رسالة واحدة كل يوم.\n\nلا تستعجل، ولا تحاول تعرف اللي بعدها.\n\nلأن أجمل الأشياء… تجي في وقتها.\n\nوأتمنى مع نهاية هذه الرحلة، يكون فيه على الأقل 365 ابتسامة، و365 لحظة جميلة، ورسائل تلقاها وقت ما تحتاجها.\n\nكل عام وأنت بخير يا حبيبي…\n\nوأتمنى أكون سببًا، ولو لابتسامة واحدة… في كل يوم من سنتك الجديدة. 🤍',
-    image:null,
-    audio:null,
-    video:null
-  }
-  // لإضافة يوم جديد لاحقًا:
-  // 2: { title:"اليوم الثاني 🤍", preview:"رسالة جديدة…", text:"اكتبي الرسالة هنا", image:null, audio:null, video:null }
-};
+// الرسائل تأتي من الملف الخارجي messages.js
+function getMessage(day){
+  const raw = Array.isArray(messages) ? messages[day-1] : messages?.[day];
+  if(!raw) return null;
+  return {
+    title: raw.title || `اليوم ${day} 🤍`,
+    preview: raw.preview || "رسالة جديدة تنتظرك…",
+    text: raw.text ?? raw.body ?? "",
+    image: raw.image || null,
+    audio: raw.audio || null,
+    video: raw.video || null
+  };
+}
+
 
 const music=$("music");
 let muted=false,opened=false,currentViewingDay=1,openedFromCalendar=false;
@@ -171,7 +179,7 @@ function projectDayForDate(date){return Math.floor((normalizeDate(date)-START_DA
 function arabicOrdinal(day){return day===1?"الأول":String(day)}
 
 function renderMessage(day){
-  const m=messages[day];
+  const m=getMessage(day);
   currentViewingDay=day;
   $("letterTitle").textContent=m?.title||`اليوم ${day} 🤍`;
   $("letterBody").textContent=m?.text||"هذه الرسالة لم تُضف بعد.";
@@ -208,7 +216,7 @@ $("introContinue").addEventListener("click",()=>show("welcome"));
 $("journey").addEventListener("click",()=>{
   $("calendarBtn").classList.remove("hidden");
   const today=Math.max(1,Math.min(365,availableThrough()||1));
-  renderMessage(messages[today]?today:1);
+  renderMessage(getMessage(today)?today:1);
   opened=false;$("envelope").classList.remove("open");show("envelopeScreen");
 });
 
@@ -263,7 +271,7 @@ function renderCalendar(){
     const projectDay=projectDayForDate(date);
     const inProject=projectDay>=1&&projectDay<=365;
     const unlocked=inProject&&projectDay<=through;
-    const hasContent=!!messages[projectDay];
+    const hasContent=!!getMessage(projectDay);
     const isToday=projectDay===through&&through>=1;
     const cell=document.createElement("button");
     cell.className="calendarDay";
@@ -273,7 +281,7 @@ function renderCalendar(){
     if(isToday)cell.classList.add("today");
     if(localStorage.getItem(`opened-day-${projectDay}`))cell.classList.add("opened");
     const marks=[];
-    const m=messages[projectDay];
+    const m=getMessage(projectDay);
     if(m?.image)marks.push("🖼️");if(m?.audio)marks.push("🎧");if(m?.video)marks.push("🎥");
     cell.innerHTML=`<span class="dayNum">${d}</span>${inProject?`<span class="dayProject">اليوم ${projectDay}</span>`:""}${unlocked&&hasContent?`<span class="mediaMarks">${marks.length?marks.join(""):"✉"}</span>`:inProject?'<span class="lockMark">🔒</span>':""}`;
     cell.disabled=!inProject;
@@ -289,6 +297,12 @@ function showLockToast(message="هذه الرسالة لم يحن وقتها ب�
   const t=$("lockToast");t.textContent=message;t.classList.add("show");clearTimeout(showLockToast.timer);
   showLockToast.timer=setTimeout(()=>t.classList.remove("show"),2200);
 }
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("./sw.js?v=2").catch(()=>{});
+  });
+}
+
 </script>
 </body>
 </html>
