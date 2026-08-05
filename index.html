@@ -265,7 +265,7 @@ function renderCalendar(){
   const firstDay=new Date(viewMonth.getFullYear(),viewMonth.getMonth(),1).getDay();
   const daysInMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+1,0).getDate();
   for(let i=0;i<firstDay;i++){const blank=document.createElement("div");blank.className="calendarDay blank";grid.appendChild(blank)}
-  const through=365;
+  const through=availableThrough();
   for(let d=1;d<=daysInMonth;d++){
     const date=new Date(viewMonth.getFullYear(),viewMonth.getMonth(),d);
     const projectDay=projectDayForDate(date);
