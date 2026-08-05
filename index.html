@@ -137,7 +137,7 @@
 </div>
 <div id="lockToast" class="lockToast">هذه الرسالة لم يحن وقتها بعد… 🤍</div>
 
-<script src="messages.js?v=10"></script>
+<script src="messages.js?v=11"></script>
 <script>
 const ids=["gate","intro","welcome","envelopeScreen","letter","complete"];
 const $=id=>document.getElementById(id);
@@ -156,7 +156,9 @@ function getMessage(day){
     text: raw.text ?? raw.body ?? "",
     image: raw.image || null,
     audio: raw.audio || null,
-    video: raw.video || null
+    video: raw.video || null,
+    link: raw.link || null,
+    linkLabel: raw.linkLabel || "افتح الرابط"
   };
 }
 
@@ -194,11 +196,16 @@ function renderMedia(m){
   if(m?.image)items.push(["🖼️","صورة","image",m.image]);
   if(m?.audio)items.push(["🎧","رسالة صوتية","audio",m.audio]);
   if(m?.video)items.push(["🎥","فيديو","video",m.video]);
+  if(m?.link)items.push(["🎵",m.linkLabel||"افتح الرابط","link",m.link]);
   tray.classList.toggle("hidden",items.length===0);
   items.forEach(([icon,label,type,src])=>{
     const b=document.createElement("button");
     b.className="mediaChip";b.textContent=`${icon} ${label}`;
     b.onclick=()=>{
+      if(type==="link"){
+        window.open(src,"_blank","noopener,noreferrer");
+        return;
+      }
       area.innerHTML=type==="image"?`<img src="${src}" alt="صورة اليوم">`
         :type==="audio"?`<audio controls src="${src}"></audio>`
         :`<video controls playsinline src="${src}"></video>`;
@@ -215,8 +222,8 @@ $("soundBtn").addEventListener("click",()=>{muted=!muted;music.muted=muted;$("so
 $("introContinue").addEventListener("click",()=>show("welcome"));
 $("journey").addEventListener("click",()=>{
   $("calendarBtn").classList.remove("hidden");
-  const today = 365; = 365; = 365; = 365; = 365;=Math.max(1,Math.min(365,availableThrough()||1));
-  renderMessage(getMessage(today = 365; = 365; = 365; = 365; = 365;)?today = 365; = 365; = 365; = 365;:1);
+  const today=Math.max(1,Math.min(365,availableThrough()||1));
+  renderMessage(getMessage(today)?today:1);
   opened=false;$("envelope").classList.remove("open");show("envelopeScreen");
 });
 
@@ -272,13 +279,13 @@ function renderCalendar(){
     const inProject=projectDay>=1&&projectDay<=365;
     const unlocked=inProject&&projectDay<=through;
     const hasContent=!!getMessage(projectDay);
-    const istoday = 365; = 365; = 365; = 365;=projectDay===through&&through>=1;
+    const istoday=projectDay===through&&through>=1;
     const cell=document.createElement("button");
     cell.className="calendarDay";
     if(!inProject)cell.classList.add("locked");
     else if(unlocked&&hasContent)cell.classList.add("available");
     else cell.classList.add("locked");
-    if(istoday = 365; = 365; = 365; = 365;)cell.classList.add("today = 365; = 365; = 365; = 365;");
+    if(istoday)cell.classList.add("today");
     if(localStorage.getItem(`opened-day-${projectDay}`))cell.classList.add("opened");
     const marks=[];
     const m=getMessage(projectDay);
@@ -299,7 +306,7 @@ function showLockToast(message="هذه الرسالة لم يحن وقتها ب�
 }
 if("serviceWorker" in navigator){
   window.addEventListener("load",()=>{
-    navigator.serviceWorker.register("./sw.js?v=2").catch(()=>{});
+    navigator.serviceWorker.register("./sw.js?v=3").catch(()=>{});
   });
 }
 

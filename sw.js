@@ -1,5 +1,5 @@
-const CACHE='bassam-365-v2';
-const STATIC=['./','./index.html','./messages.js','./manifest.webmanifest','./apple-touch-icon.png','./icon-180.png','./icon-192.png','./icon-512.png','./assets/365-days-for-you-full.mp3'];
+const CACHE='bassam-365-v3';
+const STATIC=['./','./index.html','./messages.js','./manifest.webmanifest','./apple-touch-icon.png','./icon-180.png','./icon-192.png','./icon-512.png','./assets/365-days-for-you-full.mp3','./assets/first-date.jpg','./assets/sunrise-first-kiss.mp4'];
 
 self.addEventListener('install',event=>{
   self.skipWaiting();
